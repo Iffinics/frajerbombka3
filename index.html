@@ -49,6 +49,37 @@
         <div class="upload_grid">
             
             <p class="upload_text">Dodaj zdjęcie</p>
+        
+            <script>
+            const wyborPliku = document.getElementById('wybor-pliku');
+        const podgladZdjecia = document.getElementById('podglad-zdjecia');
+        const tekstPomocniczy = document.getElementById('tekst-pomocniczy');
+
+        // Słuchamy, czy użytkownik wybrał jakiś plik
+        wyborPliku.addEventListener('change', function() {
+            const plik = this.files[0]; // Pobieramy pierwszy wybrany plik
+
+            if (plik) {
+                const reader = new FileReader(); // Tworzymy obiekt do czytania plików
+
+                // Kiedy plik zostanie pomyślnie wczytany...
+                reader.addEventListener('load', function() {
+                    podgladZdjecia.setAttribute('src', this.result); // Ustawiamy źródło obrazka
+                    podgladZdjecia.style.display = 'block';         // Pokazujemy obrazek
+                    tekstPomocniczy.style.display = 'none';         // Ukrywamy napis "Brak zdjęcia"
+                });
+
+                reader.readAsDataURL(plik); // Uruchamiamy wczytywanie pliku jako URL
+            } else {
+                // Jeśli użytkownik anulował wybór
+                podgladZdjecia.style.display = 'none';
+                tekstPomocniczy.style.display = 'block';
+            }
+        });
+    </script>
+</html>
+        
+        
         </div>
     </div>
 
